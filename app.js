@@ -5,7 +5,6 @@ const port = 8080;
 
 mongoose.connect('mongodb+srv://alolop_ovh:UkfvG2T00w6innQQ@cosmose.6pydv0w.mongodb.net/?retryWrites=true&w=majority', 
 	{ useNewUrlParser: true,
-      useFindAndModify: false,
 	  useUnifiedTopology: true})
 	.then(() => console.log('Connexion à Mongodb réussie !'))
 	.catch((error) => console.log(error)); 
