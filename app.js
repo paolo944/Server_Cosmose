@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 const app = express();
 const port = 8080;
 
-mongoose.connect('mongodb+srv://alolop_ovh:IVCxFJusVqioqfBK@cosmose.6pydv0w.mongodb.net/?retryWrites=true&w=majority', 
-	{useNewUrlParser: true,
-	useUnifiedTopology: true})
+mongoose.connect('mongodb+srv://alolop_ovh:IVCxFJusVqioqfBK@cosmose.6pydv0w.mongodb.net/test?retryWrites=true&w=majority', 
+	{ useNewUrlParser: true,
+	  useUnifiedTopology: true})
 	.then(() => console.log('Connexion à Mongodb réussie !'))
 	.catch((error) => console.log(error)); 
 
