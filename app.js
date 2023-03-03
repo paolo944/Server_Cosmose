@@ -11,13 +11,12 @@ const port = 8080;
 	.then(() => console.log('Connexion à Mongodb réussie !'))
 	.catch((error) => console.log(error)); */
 
-let db = new sqlite3.Database('./db/users', function(err) {
+let db = new sqlite3.Database('./db/users.db', sqlite3.OPEN_READWRITE, function(err) {
 		if(err) {
 			return console.log(err);
 		}
 		console.log("connecté à la base de données sql");
 		db.run(`CREATE TABLE users (
-			id int not null,
 			nom varchar(20) not null,
 			prenom varchar(20) not null,
 			login varchar(20) not null,
@@ -41,13 +40,14 @@ app.post('/connexion', (req, res) => {
 })
 
 app.post('/inscription', (req, res) => {
-	db.run(`INSERT INTO users values (${this.lastID}, ${req.body.nom}, ${req.body.prenom}, ${req.body.login}, ${req.body.mdp})`,
+	db.run(`INSERT INTO users values (${req.body.nom}, ${req.body.prenom}, ${req.body.login}, ${req.body.mdp})`,
 	function(err) {
 		if(err){
 			res.status(400).json({err});
 		}
 	res.status(201).json({created: true});
-	})
+	}
+	)
 })
 
 app.get('/', (req, res) => {
@@ -57,3 +57,11 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
     console.log(`Le serveur est en écoute sur le port ${port}`);
 });
+
+db.close((err) => {
+	if(err) {
+		return console.error(err.message)
+	}
+	console.log('Fermeture de la connexion à la base de données');	
+});
+
