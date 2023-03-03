@@ -13,7 +13,7 @@ const port = 8080;
 
 let db = new sqlite3.Database('./db/users', function(err) {
 		if(err) {
-			return console.log(error);
+			return console.log(err);
 		}
 		console.log("connecté à la base de données sql");
 		db.run(`CREATE TABLE users (
@@ -24,7 +24,7 @@ let db = new sqlite3.Database('./db/users', function(err) {
 			mdp varchar(64) not null
 			)
 		`);
-	)
+	});
 
 app.use(express.json());
 

@@ -13,7 +13,7 @@ const port = 8080;
 
 let db = new sqlite3.Database('./db/users', function(err) {
 		if(err) {
-			return console.log(error);
+			return console.log(err);
 		}
 		console.log("connecté à la base de données sql");
 		db.run(`CREATE TABLE users (
@@ -41,9 +41,13 @@ app.post('/connexion', (req, res) => {
 })
 
 app.post('/inscription', (req, res) => {
-	db.run(`INSERT INTO users values (${this.lastID}, ${req.body.nom}, ${req.body.prenom}, ${req.body.login}, ${req.body.mdp})`)
-	.then(() => res.status(201).json({created: true}))
-	.catch((error) => res.status(400).json({error}));
+	db.run(`INSERT INTO users values (${this.lastID}, ${req.body.nom}, ${req.body.prenom}, ${req.body.login}, ${req.body.mdp})`,
+	function(err) {
+		if(err){
+			res.status(400).json({err});
+		}
+	res.status(201).json({created: true}));
+	}
 })
 
 app.get('/', (req, res) => {
