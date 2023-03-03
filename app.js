@@ -24,7 +24,7 @@ let db = new sqlite3.Database('./db/users')
 			)
 		`);
 
-	}
+	})
 	.catch((error) => console.log(error));
 
 app.use(express.json());

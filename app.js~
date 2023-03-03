@@ -14,7 +14,7 @@ mongoose.connect('mongodb+srv://alolop_ovh:UkfvG2T00w6innQQ@cosmose.6pydv0w.mong
 
 let db = new sqlite3.Database('./db/users')
 	.then(() => {
-		console.log("connecté à la base de données sql"));
+		console.log("connecté à la base de données sql");
 		db.run(`CREATE TABLE users (
 			id int not null,
 			nom varchar(20) not null,
