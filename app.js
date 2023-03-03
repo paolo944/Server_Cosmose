@@ -24,7 +24,7 @@ let db = new sqlite3.Database('./db/users', function(err) {
 			mdp varchar(64) not null
 			)
 		`);
-	)
+	});
 
 app.use(express.json());
 
