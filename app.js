@@ -6,11 +6,11 @@ const User = require('user');
 const app = express();
 const port = 8080;
 
-mongoose.connect('mongodb+srv://alolop_ovh:UkfvG2T00w6innQQ@cosmose.6pydv0w.mongodb.net/?retryWrites=true&w=majority', 
+/*mongoose.connect('mongodb+srv://alolop_ovh:UkfvG2T00w6innQQ@cosmose.6pydv0w.mongodb.net/?retryWrites=true&w=majority', 
 	{ useNewUrlParser: true,
 	  useUnifiedTopology: true})
 	.then(() => console.log('Connexion à Mongodb réussie !'))
-	.catch((error) => console.log(error)); 
+	.catch((error) => console.log(error)); */
 
 let db = new sqlite3.Database('./db/users')
 	.then(() => {
