@@ -46,7 +46,7 @@ app.post('/inscription', (req, res) => {
 		if(err){
 			res.status(400).json({err});
 		}
-	res.status(201).json({created: true}));
+	res.status(201).json({created: true});
 	}
 })
 

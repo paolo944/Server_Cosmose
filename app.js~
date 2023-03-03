@@ -41,9 +41,13 @@ app.post('/connexion', (req, res) => {
 })
 
 app.post('/inscription', (req, res) => {
-	db.run(`INSERT INTO users values (${this.lastID}, ${req.body.nom}, ${req.body.prenom}, ${req.body.login}, ${req.body.mdp})`)
-	.then(() => res.status(201).json({created: true}))
-	.catch((error) => res.status(400).json({error}));
+	db.run(`INSERT INTO users values (${this.lastID}, ${req.body.nom}, ${req.body.prenom}, ${req.body.login}, ${req.body.mdp})`,
+	function(err) {
+		if(err){
+			res.status(400).json({err});
+		}
+	res.status(201).json({created: true}));
+	}
 })
 
 app.get('/', (req, res) => {
