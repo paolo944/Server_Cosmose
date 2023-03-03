@@ -11,10 +11,8 @@ const port = 8080;
 	.then(() => console.log('Connexion à Mongodb réussie !'))
 	.catch((error) => console.log(error)); */
 
-let db = new sqlite3.Database('./db/users', function(err) {
-		if(err) {
-			return console.log(error);
-		}
+let db = new sqlite3.Database('./db/users')
+	.then(() => {
 		console.log("connecté à la base de données sql");
 		db.run(`CREATE TABLE users (
 			id int not null,
@@ -24,7 +22,9 @@ let db = new sqlite3.Database('./db/users', function(err) {
 			mdp varchar(64) not null
 			)
 		`);
-	)
+
+	})
+	.catch((error) => console.log(error));
 
 app.use(express.json());
 
