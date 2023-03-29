@@ -5,6 +5,7 @@ const Auth = require('./entitites/authentification');
 const Msg = require('./entitites/messages');
 
 const api = express.Router();
+api.use(express.json());
 
 async function main(){
     const uri = "mongodb+srv://alolop_ovh:UkfvG2T00w6innQQ@cosmose.6pydv0w.mongodb.net/?retryWrites=true&w=majority";
@@ -12,9 +13,15 @@ async function main(){
     try {
         await client.connect();
 		console.log("Base de donnée connecté !");
-        api.use('/users', Users);
-		api.use('authentification', Auth);
-		api.use('messages', Msg);
+        api.use('/users', (res, req) => {
+			Users(client, res, req);
+		});
+		api.use('/authentification', (res, req) => {
+			Auth(client, res, req);
+		});
+		api.use('/messages', (res, req) => {
+			Msg(client, res, req);
+		});
     } catch(e) {
         console.error(e);
 		api.use('', (res, req) => {
